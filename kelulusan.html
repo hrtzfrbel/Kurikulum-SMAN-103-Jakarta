@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMAN 103 JAKARTA - Kurikulum Sekolah</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        /* =============================== */
+        /* CSS Stylesheet                  */
+        /* =============================== */
+
+        /* Reset CSS & General Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Atas dengan Logo Gambar */
+       .top-header {
+            background-color: #ffffff;
+            padding: 1rem 0; /* Mengurangi padding sedikit agar tidak terlalu besar */
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px; /* Jarak antara logo dan teks */
+        }
+
+        .header-logo img {
+            height: 60px; /* Ukuran tinggi logo */
+            width: auto; /* Lebar otomatis agar proporsional */
+            vertical-align: middle; /* Agar sejajar dengan teks */
+        }
+        
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #2c3e50;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .navbar ul li {
+            margin: 5px 20px;
+        }
+
+        .navbar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1rem;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        /* Section Styling */
+        .content-section {
+            padding: 60px 0;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .content-section:last-child {
+            border-bottom: none;
+        }
+
+        .content-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #2c3e50;
+        }
+
+        .content-box {
+            background-color: #fff;
+            padding: 40px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #343a40;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* Input Controls for Chart */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            min-width: 200px;
+        }
+        
+        select, input[type="text"] {
+            padding: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+        
+        select:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .search-button {
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            background-color: #3498db;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            align-self: flex-end;
+        }
+        
+        .search-button:hover {
+            background-color: #2980b9;
+        }
+        
+        /* Results Area */
+        .results {
+            margin-top: 2rem;
+        }
+        
+        #chart-container {
+            display: none; /* Hidden by default */
+        }
+        
+        #message {
+            display: none; /* Hidden by default */
+            text-align: center;
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            padding: 2rem;
+            background-color: #ecf0f1;
+            border-radius: 8px;
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: #2c3e50;
+            color: #bdc3c7;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="header-container">
+            <div class="header-logo">
+                <img src="logo-sman103.png" alt="Logo SMAN 103 Jakarta"> 
+            </div>
+            <h1 class="header-title">KURIKULUM SMAN 103 JAKARTA</h1>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Tentang Kita</a></li>
+            <li><a href="kelulusan.html">Kelulusan Siswa</a></li>
+            <li><a href="prestasi.html">Prestasi</a></li>
+            <li><a href="penerimaan.html">Penerimaan Siswa</a></li>
+            <li><a href="kontak.html">Kontak</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="kelulusan" class="content-section">
+            <div class="container">
+                <h2>Informasi Kelulusan</h2>
+                <div class="content-box">
+                    <table>
+                        <tr>
+                            <th>Nama Siswa</th>
+                            <th>Kelas</th>
+                            <th>Status</th>
+                        </tr>
+                         <tr>
+                            <td>Aira Ratu Anindita</td>
+                            <td>XII-F1</td>
+                            <td>LULUS</td>
+                        </tr>
+                        <tr>
+                            <td>Annabelle Sekar Dewayantie</td>
+                            <td>XII-F1</td>
+                            <td>LULUS</td>
+                        </tr>
+                           <tr>
+                            <td>Askana Fitri Ratifa</td>
+                            <td>XII-F1</td>
+                            <td>LULUS</td>
+                        </tr>
+                         <tr>
+                            <td>David Felix Nathanael</td>
+                            <td>XII-F1</td>
+                            <td>LULUS</td>
+                        </tr>
+                         <tr>
+                            <td>Nayyara Azzarine Farassila</td>
+                            <td>XII-F1</td>
+                            <td>LULUS</td>
+                        </tr>
+                        <tr>
+                            <td>Satria Delvino</td>
+                            <td>XII-F1</td>
+                            <td>LULUS</td>
+                        </tr>
+                     
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container">
+                <h2>Data Peminat & Daya Tampung Universitas</h2>
+                <div class="content-box">
+                    <div class="controls">
+                        <div class="input-group">
+                            <select id="university-select">
+                                <option value="">Pilih Universitas...</option>
+                                <option value="Universitas Indonesia">Universitas Indonesia</option>
+                                <option value="Institut Teknologi Bandung">Institut Teknologi Bandung</option>
+                                <option value="Universitas Gadjah Mada">Universitas Gadjah Mada</option>
+                                <option value="" disabled>Universitas lain segera ada</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id="major-input" placeholder="Ketik Pilihan Jurusan..">
+                        </div>
+                        <button class="search-button" id="search-btn">Cari</button>
+                    </div>
+
+                    <div class="results">
+                        <div id="chart-container">
+                            <canvas id="data-chart"></canvas>
+                        </div>
+                        <div id="message">
+                            Data belum tersedia, periksa lagi nanti.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 SMAN 103 Jakarta. Hak Cipta Dilindungi.</p>
+    </footer>
+
+    <script>
+        /* =============================== */
+        /* JavaScript Logic                */
+        /* =============================== */
+
+        // --- DATABASE SIMULATION ---
+        const universityData = {
+         "Universitas Indonesia": {
+                "Pendidikan Dokter": {
+                    years: [2022, 2023, 2024, 2025],
+                    peminat: [2900, 3000, 3800, 3300],
+                    dayaTampung: [120, 120, 125, 130],
+                    deskripsi: "Program studi Pendidikan Dokter (atau lebih dikenal dengan Kedokteran) adalah salah satu prodi yang tiap tahun selalu banyak peminatnya. Di prodi ini kamu akan mempelajari berbagai hal terkait penyakit dan cara penyembuhannya."
+                },
+                "Teknik Sipil": {
+                    years: [2022, 2023, 2024, 2025],
+                    peminat: [650, 500, 900, 910],
+                    dayaTampung: [80, 85, 85, 90],
+                    deskripsi: "Mempelajari perencanaan lengkap konstruksi bangunan, jembatan, gedung, jalan, dsb. Selain itu sarjana teknik sipil juga diajarkan pelaksanaan pengawasan dan pengolahan infrastruktur."
+                },
+                "Teknik Kimia": {
+                    years: [2022, 2023, 2024, 2025],
+                    peminat: [380, 280, 580, 620],
+                    dayaTampung: [70, 70, 75, 75],
+                    deskripsi: "Teknik kimia merupakan ilmu yang mempelajari proses konversi bahan mentah menjadi sebuah produk yang lebih bernilai secara komersial dengan memanfaatkan proses-proses kimia dan fisika."
+                }
+            },
+            "Institut Teknologi Bandung": {
+                "Sekolah Teknik Elektro dan Informatika - Komputasi (STEI-K)": {
+                    years: [2022, 2023, 2024, 2025],
+                    peminat: [2800, 3200, 3800, 3300],
+                    dayaTampung: [150, 150, 160, 160],
+                    deskripsi: "Sains komputasi adalah disiplin ilmu yang menggunakan model matematika dan simulasi komputer untuk mempelajari dan memecahkan masalah-masalah sains yang kompleks."
+                },
+                "Sekolah Arsitektur, Perencanaan dan Pengembangan Kebijakan (SAPPK)": {
+                    years: [2022, 2023, 2024, 2025],
+                    peminat: [900, 1200, 1300, 1200],
+                    dayaTampung: [100, 105, 105, 110],
+                    deskripsi: "Jurusan Perencanaan Wilayah dan Kota merupakan jurusan yang mempelajari kondisi wilayah serta keterkaitannya dengan berbagai elemen sosial, ekonomi, dan politik untuk pengembangan wilayah."
+                },
+                "Fakultas Senirupa dan Desain (FSRD)": {
+                    years: [2022, 2023, 2024, 2025],
+                    peminat: [1600, 1700, 1850, 1600],
+                    dayaTampung: [110, 110, 115, 120],
+                    deskripsi: "Mempelajari mengenai manfaat & pemberdayaan, pengembangan ilmu pengetahuan dan teknologi maupun seni serta meningkatkan apresiasi masyarakat terhadap seni dan desain."
+                }
+            },
+            "Universitas Gadjah Mada": {
+                 "Psikologi": {
+                    years: [2022, 2023, 2024, 2025],
+                    peminat: [4100, 3800, 3900, 4000],
+                    dayaTampung: [150, 150, 155, 160],
+                    deskripsi: "Ilmu yang berkaitan dengan proses-proses mental (normal maupun abnormal) yang berpengaruh pada perilaku manusia, fungsi mental manusia secara ilmiah juga mempelajari proses fisiologis dan neurobiologis."
+                },
+                "Akuntansi": {
+                    years: [2022, 2023, 2024, 2025],
+                    peminat: [2200, 1600, 1700, 2200],
+                    dayaTampung: [100, 100, 110, 110],
+                    deskripsi: "Akuntansi adalah proses mencatat, mengklasifikasi dan merangkum informasi finansial yang berkaitan dengan semua transaksi dan kejadian di perusahaan serta menafsirkan hasilnya."
+                },
+                "Teknik Industri": {
+                    years: [2022, 2023, 2024, 2025],
+                    peminat: [1100, 1000, 1200, 1400],
+                    dayaTampung: [90, 90, 95, 100],
+                    deskripsi: "Mempelajari cara pengaturan fasilitas produksi (karyawan, bahan mentah, mesin, pemasaran, keuangan) untuk meningkatkan kinerja sistem dalam hal efisiensi, efektivitas dan produktivitas."
+                }
+            }
+        };
+
+        // --- SCRIPT LOGIC ---
+        const universitySelect = document.getElementById('university-select');
+        const majorInput = document.getElementById('major-input');
+        const searchBtn = document.getElementById('search-btn');
+        const chartContainer = document.getElementById('chart-container');
+        const messageDiv = document.getElementById('message');
+        const chartCanvas = document.getElementById('data-chart');
+        
+        let dataChart = null; // To hold the chart instance
+
+        function normalizeString(str) {
+            return str.toLowerCase().replace(/\s*\(s1\)|\s+/g, ' ').trim();
+        }
+
+        function findMajorData(university, majorQuery) {
+            if (!universityData[university]) {
+                return null;
+            }
+            const normalizedQuery = normalizeString(majorQuery);
+            const majors = Object.keys(universityData[university]);
+            for (const major of majors) {
+                if (normalizeString(major) === normalizedQuery) {
+                    return universityData[university][major];
+                }
+            }
+            return null;
+        }
+        
+        function displayChart(data) {
+            messageDiv.style.display = 'none';
+            chartContainer.style.display = 'block';
+
+            if (dataChart) {
+                dataChart.destroy();
+            }
+
+            const ctx = chartCanvas.getContext('2d');
+            dataChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.years,
+                    datasets: [
+                        {
+                            label: 'Jumlah Peminat',
+                            data: data.peminat,
+                            borderColor: 'rgba(255, 159, 64, 1)',
+                            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                            borderWidth: 3,
+                            pointBackgroundColor: 'rgba(255, 159, 64, 1)',
+                            pointBorderColor: '#000',
+                            pointBorderWidth: 2,
+                            pointRadius: 6,
+                            tension: 0.3
+                        },
+                        {
+                            label: 'Daya Tampung',
+                            data: data.dayaTampung,
+                            borderColor: 'rgba(192, 57, 43, 1)',
+                            backgroundColor: 'rgba(192, 57, 43, 0.2)',
+                            borderWidth: 3,
+                            pointBackgroundColor: 'rgba(192, 57, 43, 1)',
+                            pointBorderColor: '#000',
+                            pointBorderWidth: 2,
+                            pointRadius: 6,
+                            tension: 0.3
+                        }
+                    ]
+                },
+                // ========= AWAL BAGIAN YANG DIPERBAIKI =========
+                options: {
+                    responsive: true,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const dataIndex = context.dataIndex;
+                                    const peminat = context.chart.data.datasets[0].data[dataIndex];
+                                    const tampung = context.chart.data.datasets[1].data[dataIndex];
+                                    
+                                    // Hanya tampilkan detail jika kita sedang memproses dataset pertama
+                                    // untuk menghindari teks duplikat di tooltip
+                                    if (context.datasetIndex === 0) {
+                                        return [
+                                            `Jumlah Peminat: ${peminat}`,
+                                            `Daya Tampung: ${tampung}`
+                                        ];
+                                    }
+                                    return ''; // Kosongkan untuk dataset lainnya
+                                },
+                                title: function(tooltipItems) {
+                                    // Menggunakan label (tahun) sebagai judul tooltip
+                                    return tooltipItems[0].label;
+                                },
+                                // Hapus callback 'footer' yang lama karena sudah digantikan oleh 'label'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    if (value >= 1000) return (value / 1000) + 'K';
+                                    return value;
+                                }
+                            }
+                        }
+                    }
+                }
+                // ========= AKHIR BAGIAN YANG DIPERBAIKI =========
+            });
+        }
+
+        function showMessage() {
+            chartContainer.style.display = 'none';
+            messageDiv.style.display = 'block';
+        }
+
+        searchBtn.addEventListener('click', () => {
+            const selectedUniversity = universitySelect.value;
+            const enteredMajor = majorInput.value;
+            
+            if (!selectedUniversity || !enteredMajor) {
+                alert("Mohon pilih universitas dan ketik jurusan terlebih dahulu.");
+                return;
+            }
+
+            const data = findMajorData(selectedUniversity, enteredMajor);
+
+            if (data) {
+                displayChart(data);
+            } else {
+                showMessage();
+            }
+        });
+    </script>
+</body>
+</html>

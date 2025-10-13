@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMAN 103 JAKARTA - Kurikulum Sekolah</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =============================== */
+        /* CSS Stylesheet                  */
+        /* =============================== */
+
+        /* Reset CSS & General Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Atas dengan Logo Gambar */
+        .top-header {
+            background-color: #ffffff;
+            padding: 1rem 0; /* Mengurangi padding sedikit agar tidak terlalu besar */
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px; /* Jarak antara logo dan teks */
+        }
+
+        .header-logo img {
+            height: 60px; /* Ukuran tinggi logo */
+            width: auto; /* Lebar otomatis agar proporsional */
+            vertical-align: middle; /* Agar sejajar dengan teks */
+        }
+        
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+
+        /* Navbar */
+        .navbar {
+            background-color: #2c3e50;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap; /* Agar responsif di layar kecil */
+        }
+
+        .navbar ul li {
+            margin: 5px 20px;
+        }
+
+        .navbar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1rem;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        /* Hero Section (Bagian Gambar Sekolah) */
+        .hero-section {
+            height: 70vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://file.data.kemendikdasmen.go.id/sekolahkita/20/2010/20103292-8.jpg'); /* Ganti dengan URL gambar sekolah Anda */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            padding: 0 20px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .school-name {
+            font-size: clamp(2.5rem, 5vw, 4rem); /* Font responsif */
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        }
+
+        .school-tagline {
+            font-size: clamp(1.2rem, 3vw, 1.5rem); /* Font responsif */
+            font-weight: 300;
+            margin-top: 1rem;
+        }
+
+        /* Visi Misi Section */
+        .vision-mission-section {
+            padding: 60px 0;
+            background-color: #ffffff;
+        }
+
+        .vision-mission-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #2c3e50;
+        }
+
+        .vision-mission-content {
+            background-color: #fff;
+            padding: 40px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .vision, .mission {
+            margin-bottom: 30px;
+        }
+        
+        .mission {
+            margin-bottom: 0;
+        }
+
+        .vision h3, .mission h3 {
+            font-size: 1.8rem;
+            color: #3498db;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .mission ul {
+            list-style-position: inside;
+            padding-left: 10px;
+        }
+
+        .mission ul li {
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: #2c3e50;
+            color: #bdc3c7;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="header-container">
+            <div class="header-logo">
+                <img src="logo-sman103.png" alt="Logo SMAN 103 Jakarta"> 
+            </div>
+            <h1 class="header-title">KURIKULUM SMAN 103 JAKARTA</h1>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Tentang Kita</a></li>
+            <li><a href="kelulusan.html">Kelulusan Siswa</a></li>
+            <li><a href="prestasi.html">Prestasi</a></li>
+            <li><a href="penerimaan.html">Penerimaan Siswa</a></li>
+            <li><a href="kontak.html">Kontak</a></li>
+        </ul>
+    </nav>
+
+    <main>
+    
+       <section class="vision-mission-section">
+            <div class="container">
+                <h2>Kontak</h2>
+                <div class="vision-mission-content">
+                    <div class="vision">
+                        <p><br>Alamat: Jl. Mawar Merah VI Perumnas Klender, Malaka Jaya, Duren Sawit, Jakarta Timur 13460<br>
+                            <br>Telepon: 021 862-2372</br>
+                            <br>Email: info@sman103jakarta.sch.id</br></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 SMAN 103 Jakarta. Hak Cipta Dilindungi.</p>
+    </footer>
+
+</body>
+</html>

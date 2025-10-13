@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMAN 103 JAKARTA - Kurikulum Sekolah</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =============================== */
+        /* CSS Stylesheet                  */
+        /* =============================== */
+
+        /* Reset CSS & General Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Atas dengan Logo Gambar */
+        .top-header {
+            background-color: #ffffff;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-logo img {
+            height: 60px;
+            width: auto;
+            vertical-align: middle;
+        }
+        
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #2c3e50;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .navbar ul li {
+            margin: 5px 20px;
+        }
+
+        .navbar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1rem;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #3498db;
+            color: #fff;
+        }
+        
+        /* Section Styling */
+        .content-section {
+            padding: 60px 0;
+            background-color: #ffffff;
+        }
+        
+        .content-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #2c3e50;
+        }
+        
+        /* Footer */
+        .site-footer {
+            background-color: #2c3e50;
+            color: #bdc3c7;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+        }
+        
+        /* ========= AWAL KODE BARU UNTUK FORMULIR KALKULATOR ========= */
+        .form-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto; /* Center the form */
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        
+        .form-group.inline {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .form-group.inline > * {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .calculate-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            background-color: #2c3e50;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 2rem;
+        }
+        
+        .calculate-btn:hover {
+            background-color: #34495e;
+        }
+
+        .result-container {
+            display: none;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .result-container h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .result-container p {
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .success {
+            background-color: #e9f7ec;
+            border: 1px solid #28a745;
+            color: #28a745;
+        }
+        
+        .failure {
+            background-color: #fdecea;
+            border: 1px solid #dc3545;
+            color: #dc3545;
+        }
+        /* ========= AKHIR KODE BARU UNTUK FORMULIR KALKULATOR ========= */
+
+    </style>
+</head>
+<body>
+
+    <header class="top-header">
+        <div class="header-container">
+            <div class="header-logo">
+                <img src="logo-sman103.png" alt="Logo SMAN 103 Jakarta"> 
+            </div>
+            <h1 class="header-title">KURIKULUM SMAN 103 JAKARTA</h1>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Tentang Kita</a></li>
+            <li><a href="kelulusan.html">Kelulusan Siswa</a></li>
+            <li><a href="prestasi.html">Prestasi</a></li>
+            <li><a href="penerimaan.html">Penerimaan Siswa</a></li>
+            <li><a href="kontak.html">Kontak</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="penerimaan" class="content-section">
+            <div class="container">
+                <h2>Kalkulator Peluang Masuk</h2>
+                <div class="form-container">
+                    <form id="admission-form">
+                        <div class="form-group">
+                            <label for="nama">Nama Lengkap</label>
+                            <input type="text" id="nama" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ttl">Tempat/Tgl Lahir</label>
+                            <input type="text" id="ttl" placeholder="Contoh: Jakarta, 1 Januari 2009" required>
+                        </div>
+                        <div class="form-group inline">
+                            <div>
+                                <label for="umur-tahun">Umur</label>
+                                <input type="number" id="umur-tahun" placeholder="Tahun" required>
+                            </div>
+                            <div>
+                                <label for="umur-bulan">&nbsp;</label>
+                                <input type="number" id="umur-bulan" placeholder="Bulan" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="alamat">Alamat Tempat Tinggal</label>
+                            <textarea id="alamat" required></textarea>
+                        </div>
+
+                        <h3>Data Sekolah & Nilai</h3>
+                        <div class="form-group">
+                            <label for="nilai-rata-rata">Total Nilai Rata-Rata SMP (Semester 1-5)</label>
+                            <input type="number" id="nilai-rata-rata" step="0.01" placeholder="Contoh: 89.50" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="akreditasi">Akreditasi Sekolah Asal</label>
+                            <select id="akreditasi" required>
+                                <option value="">Pilih Akreditasi...</option>
+                                <option value="A">Akreditasi A</option>
+                                <option value="B">Akreditasi B</option>
+                                <option value="C">Akreditasi C</option>
+                            </select>
+                        </div>
+                        <div class="form-group inline">
+                            <div>
+                                <label for="peringkat-siswa">Peringkat di Sekolah Asal</label>
+                                <input type="number" id="peringkat-siswa" placeholder="Peringkat Anda" required>
+                            </div>
+                            <div>
+                                <label for="jumlah-siswa">Dari Total Siswa</label>
+                                <input type="number" id="jumlah-siswa" placeholder="Jumlah siswa seangkatan" required>
+                            </div>
+                        </div>
+
+                        <h3>Prestasi Akademik (Pilih Prestasi Tertinggi)</h3>
+                        <div class="form-group">
+                            <label for="prestasi-internasional">Tingkat Internasional</label>
+                            <select id="prestasi-internasional"></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="prestasi-nasional">Tingkat Nasional</label>
+                            <select id="prestasi-nasional"></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="prestasi-provinsi">Tingkat Provinsi</label>
+                            <select id="prestasi-provinsi"></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="prestasi-kota">Tingkat Kota/Kabupaten</label>
+                            <select id="prestasi-kota"></select>
+                        </div>
+
+                        <h3>Prestasi Non-Akademik (Pilih Jabatan Tertinggi)</h3>
+                        <div class="form-group">
+                            <label for="osis-mpk">OSIS/MPK</label>
+                            <select id="osis-mpk">
+                                <option value="0">Tidak Ada</option>
+                                <option value="100">Ketua</option>
+                                <option value="67">Pengurus</option>
+                                <option value="33">Anggota Pengurus</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ekskul">Ekstrakurikuler</label>
+                            <select id="ekskul">
+                                <option value="0">Tidak Ada</option>
+                                <option value="100">Ketua</option>
+                                <option value="67">Pengurus</option>
+                                <option value="33">Ketua Seksi atau Kordinator Seksi</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="calculate-btn">Kalkulasi Peluang Masuk</button>
+                    </form>
+
+                    <div id="result-container" class="result-container">
+                        <h2 id="result-message"></h2>
+                        <p id="result-score"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 SMAN 103 Jakarta. Hak Cipta Dilindungi.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const prestasiData = {
+                Internasional: {
+                    100: "Juara 1 Kedinasan Berjenjang", 97: "Juara 2 Kedinasan Berjenjang", 94: "Juara 3 Kedinasan Berjenjang",
+                    92: "Juara 1 Kedinasan Tidak Berjenjang / Juara 1 Induk Organisasi Berjenjang", 89: "Juara 2 Kedinasan Tidak Berjenjang / Juara 2 Induk Organisasi Berjenjang", 86: "Juara 3 Kedinasan Tidak Berjenjang / Juara 3 Induk Organisasi Berjenjang",
+                    84: "Juara 1 Induk Organisasi Tidak Berjenjang", 81: "Juara 2 Induk Organisasi Tidak Berjenjang", 78: "Juara 3 Induk Organisasi Tidak Berjenjang"
+                },
+                Nasional: {
+                    91: "Juara 1 Kedinasan Berjenjang", 88: "Juara 2 Kedinasan Berjenjang", 85: "Juara 3 Kedinasan Berjenjang",
+                    83: "Juara 1 Kedinasan Tidak Berjenjang / Juara 1 Induk Organisasi Berjenjang", 80: "Juara 2 Kedinasan Tidak Berjenjang / Juara 2 Induk Organisasi Berjenjang", 77: "Juara 3 Kedinasan Tidak Berjenjang / Juara 3 Induk Organisasi Berjenjang",
+                    75: "Juara 1 Induk Organisasi Tidak Berjenjang", 72: "Juara 2 Induk Organisasi Tidak Berjenjang", 69: "Juara 3 Induk Organisasi Tidak Berjenjang"
+                },
+                Provinsi: {
+                    82: "Juara 1 Kedinasan Berjenjang", 79: "Juara 2 Kedinasan Berjenjang", 76: "Juara 3 Kedinasan Berjenjang",
+                    74: "Juara 1 Kedinasan Tidak Berjenjang / Juara 1 Induk Organisasi Berjenjang", 71: "Juara 2 Kedinasan Tidak Berjenjang / Juara 2 Induk Organisasi Berjenjang", 68: "Juara 3 Kedinasan Tidak Berjenjang / Juara 3 Induk Organisasi Berjenjang",
+                    66: "Juara 1 Induk Organisasi Tidak Berjenjang", 63: "Juara 2 Induk Organisasi Tidak Berjenjang", 60: "Juara 3 Induk Organisasi Tidak Berjenjang"
+                },
+                Kota: {
+                    73: "Juara 1 Kedinasan Berjenjang", 70: "Juara 2 Kedinasan Berjenjang", 67: "Juara 3 Kedinasan Berjenjang",
+                    65: "Juara 1 Kedinasan Tidak Berjenjang / Juara 1 Induk Organisasi Berjenjang", 62: "Juara 2 Kedinasan Tidak Berjenjang / Juara 2 Induk Organisasi Berjenjang", 59: "Juara 3 Kedinasan Tidak Berjenjang / Juara 3 Induk Organisasi Berjenjang",
+                    57: "Juara 1 Induk Organisasi Tidak Berjenjang", 54: "Juara 2 Induk Organisasi Tidak Berjenjang", 51: "Juara 3 Induk Organisasi Tidak Berjenjang"
+                }
+            };
+            
+            function populateDropdown(selectId, data) {
+                const select = document.getElementById(selectId);
+                select.innerHTML = '<option value="0">Tidak Ada</option>';
+                const sortedScores = Object.keys(data).sort((a, b) => b - a);
+                sortedScores.forEach(score => {
+                    const option = document.createElement('option');
+                    option.value = score;
+                    option.textContent = data[score];
+                    select.appendChild(option);
+                });
+            }
+
+            populateDropdown('prestasi-internasional', prestasiData.Internasional);
+            populateDropdown('prestasi-nasional', prestasiData.Nasional);
+            populateDropdown('prestasi-provinsi', prestasiData.Provinsi);
+            populateDropdown('prestasi-kota', prestasiData.Kota);
+
+            const form = document.getElementById('admission-form');
+            const resultContainer = document.getElementById('result-container');
+            const resultMessage = document.getElementById('result-message');
+            const resultScore = document.getElementById('result-score');
+
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const nilaiRataRata = parseFloat(document.getElementById('nilai-rata-rata').value);
+                const akreditasi = document.getElementById('akreditasi').value;
+                const peringkatSiswa = parseInt(document.getElementById('peringkat-siswa').value);
+                const jumlahSiswa = parseInt(document.getElementById('jumlah-siswa').value);
+
+                const skorInternasional = parseFloat(document.getElementById('prestasi-internasional').value);
+                const skorNasional = parseFloat(document.getElementById('prestasi-nasional').value);
+                const skorProvinsi = parseFloat(document.getElementById('prestasi-provinsi').value);
+                const skorKota = parseFloat(document.getElementById('prestasi-kota').value);
+
+                const skorOsis = parseFloat(document.getElementById('osis-mpk').value);
+                const skorEkskul = parseFloat(document.getElementById('ekskul').value);
+                
+                if (isNaN(nilaiRataRata) || !akreditasi || isNaN(peringkatSiswa) || isNaN(jumlahSiswa) || peringkatSiswa > jumlahSiswa) {
+                    alert("Mohon isi semua data dengan benar. Pastikan peringkat tidak melebihi jumlah siswa.");
+                    return;
+                }
+
+                const nilaiKomponenRapor = nilaiRataRata * 0.30;
+
+                const peringkatPersen = (peringkatSiswa / jumlahSiswa) * 100;
+                let skorDasarPersentil = 0;
+                
+                if (akreditasi === 'A') {
+                    if (peringkatPersen <= 15) skorDasarPersentil = 100;
+                    else if (peringkatPersen <= 30) skorDasarPersentil = 90;
+                    else if (peringkatPersen <= 45) skorDasarPersentil = 80;
+                    else if (peringkatPersen <= 60) skorDasarPersentil = 70;
+                    else skorDasarPersentil = 60;
+                } else if (akreditasi === 'B') {
+                    if (peringkatPersen <= 10) skorDasarPersentil = 100;
+                    else if (peringkatPersen <= 20) skorDasarPersentil = 90;
+                    else if (peringkatPersen <= 30) skorDasarPersentil = 80;
+                    else if (peringkatPersen <= 40) skorDasarPersentil = 70;
+                    else skorDasarPersentil = 60;
+                } else if (akreditasi === 'C') {
+                    if (peringkatPersen <= 5) skorDasarPersentil = 100;
+                    else if (peringkatPersen <= 10) skorDasarPersentil = 90;
+                    else if (peringkatPersen <= 15) skorDasarPersentil = 80;
+                    else if (peringkatPersen <= 20) skorDasarPersentil = 70;
+                    else skorDasarPersentil = 60;
+                }
+                const nilaiKomponenPersentil = skorDasarPersentil * 0.30;
+
+                const skorAkademikTertinggi = Math.max(skorInternasional, skorNasional, skorProvinsi, skorKota);
+                const nilaiKomponenAkademik = skorAkademikTertinggi * 0.30;
+                
+                const skorNonAkademikTertinggi = Math.max(skorOsis, skorEkskul);
+                const nilaiKomponenNonAkademik = skorNonAkademikTertinggi * 0.05;
+
+                const nilaiAkhir = nilaiKomponenRapor + nilaiKomponenPersentil + nilaiKomponenAkademik + nilaiKomponenNonAkademik;
+
+                resultScore.textContent = `Nilai Akhir Anda: ${nilaiAkhir.toFixed(2)}`;
+                
+                if (nilaiAkhir > 59.75) {
+                    resultMessage.textContent = "SELAMAT, ANDA DITERIMA DI SMAN 103 JAKARTA";
+                    resultContainer.className = 'result-container success';
+                } else {
+                    resultMessage.textContent = "MAAF, ANDA TIDAK DITERIMA DI SMAN 103 JAKARTA";
+                    resultContainer.className = 'result-container failure';
+                }
+
+                resultContainer.style.display = 'block';
+                resultContainer.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
