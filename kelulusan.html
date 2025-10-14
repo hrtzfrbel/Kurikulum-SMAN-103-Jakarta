@@ -36,9 +36,9 @@
         }
 
         /* Header Atas dengan Logo Gambar */
-       .top-header {
+        .top-header {
             background-color: #ffffff;
-            padding: 1rem 0; /* Mengurangi padding sedikit agar tidak terlalu besar */
+            padding: 1rem 0;
             border-bottom: 1px solid #e0e0e0;
         }
         
@@ -46,13 +46,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px; /* Jarak antara logo dan teks */
+            gap: 20px;
         }
 
         .header-logo img {
-            height: 60px; /* Ukuran tinggi logo */
-            width: auto; /* Lebar otomatis agar proporsional */
-            vertical-align: middle; /* Agar sejajar dengan teks */
+            height: 60px;
+            width: auto;
+            vertical-align: middle;
         }
         
         .header-title {
@@ -211,6 +211,25 @@
             background-color: #ecf0f1;
             border-radius: 8px;
         }
+        
+        /* ========= AWAL KODE BARU UNTUK DESKRIPSI ========= */
+        #description-container {
+            display: none; /* Hidden by default */
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+        }
+        #description-container h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        #description-container p {
+            font-size: 1rem;
+            color: #555;
+            text-align: justify;
+        }
+        /* ========= AKHIR KODE BARU UNTUK DESKRIPSI ========= */
 
         /* Footer */
         .site-footer {
@@ -264,7 +283,7 @@
                             <td>XII-F1</td>
                             <td>LULUS</td>
                         </tr>
-                           <tr>
+                         <tr>
                             <td>Askana Fitri Ratifa</td>
                             <td>XII-F1</td>
                             <td>LULUS</td>
@@ -284,7 +303,7 @@
                             <td>XII-F1</td>
                             <td>LULUS</td>
                         </tr>
-                     
+                    
                     </table>
                 </div>
             </div>
@@ -305,14 +324,20 @@
                             </select>
                         </div>
                         <div class="input-group">
-                            <input type="text" id="major-input" placeholder="Ketik Pilihan Jurusan..">
-                        </div>
+                            <select id="major-select">
+                                <option value="">Pilih Jurusan...</option>
+                            </select>
+                            </div>
                         <button class="search-button" id="search-btn">Cari</button>
                     </div>
 
                     <div class="results">
                         <div id="chart-container">
                             <canvas id="data-chart"></canvas>
+                        </div>
+                        <div id="description-container">
+                            <h3>Deskripsi Jurusan</h3>
+                            <p id="major-description-text"></p>
                         </div>
                         <div id="message">
                             Data belum tersedia, periksa lagi nanti.
@@ -332,9 +357,8 @@
         /* JavaScript Logic                */
         /* =============================== */
 
-        // --- DATABASE SIMULATION ---
         const universityData = {
-         "Universitas Indonesia": {
+           "Universitas Indonesia": {
                 "Pendidikan Dokter": {
                     years: [2022, 2023, 2024, 2025],
                     peminat: [2900, 3000, 3800, 3300],
@@ -396,30 +420,41 @@
             }
         };
 
-        // --- SCRIPT LOGIC ---
         const universitySelect = document.getElementById('university-select');
-        const majorInput = document.getElementById('major-input');
+        // ========= AWAL BAGIAN YANG DIPERBAIKI (VARIABEL JURUSAN) =========
+        const majorSelect = document.getElementById('major-select'); 
+        // ========= AKHIR BAGIAN YANG DIPERBAIKI (VARIABEL JURUSAN) =========
         const searchBtn = document.getElementById('search-btn');
         const chartContainer = document.getElementById('chart-container');
         const messageDiv = document.getElementById('message');
         const chartCanvas = document.getElementById('data-chart');
+        // ========= AWAL BAGIAN YANG DIPERBAIKI (VARIABEL DESKRIPSI) =========
+        const descriptionContainer = document.getElementById('description-container');
+        const descriptionText = document.getElementById('major-description-text');
+        // ========= AKHIR BAGIAN YANG DIPERBAIKI (VARIABEL DESKRIPSI) =========
         
-        let dataChart = null; // To hold the chart instance
+        let dataChart = null;
 
-        function normalizeString(str) {
-            return str.toLowerCase().replace(/\s*\(s1\)|\s+/g, ' ').trim();
-        }
+        // ========= AWAL BAGIAN YANG DIPERBAIKI (FUNGSI POPULATE JURUSAN) =========
+        universitySelect.addEventListener('change', () => {
+            const selectedUniversity = universitySelect.value;
+            majorSelect.innerHTML = '<option value="">Pilih Jurusan...</option>'; // Reset pilihan jurusan
 
-        function findMajorData(university, majorQuery) {
-            if (!universityData[university]) {
-                return null;
+            if (selectedUniversity && universityData[selectedUniversity]) {
+                const majors = Object.keys(universityData[selectedUniversity]);
+                majors.forEach(major => {
+                    const option = document.createElement('option');
+                    option.value = major;
+                    option.textContent = major;
+                    majorSelect.appendChild(option);
+                });
             }
-            const normalizedQuery = normalizeString(majorQuery);
-            const majors = Object.keys(universityData[university]);
-            for (const major of majors) {
-                if (normalizeString(major) === normalizedQuery) {
-                    return universityData[university][major];
-                }
+        });
+        // ========= AKHIR BAGIAN YANG DIPERBAIKI (FUNGSI POPULATE JURUSAN) =========
+
+        function findMajorData(university, major) {
+            if (universityData[university] && universityData[university][major]) {
+                return universityData[university][major];
             }
             return null;
         }
@@ -427,6 +462,10 @@
         function displayChart(data) {
             messageDiv.style.display = 'none';
             chartContainer.style.display = 'block';
+            // ========= AWAL BAGIAN YANG DIPERBAIKI (TAMPILKAN DESKRIPSI) =========
+            descriptionContainer.style.display = 'block';
+            descriptionText.textContent = data.deskripsi;
+            // ========= AKHIR BAGIAN YANG DIPERBAIKI (TAMPILKAN DESKRIPSI) =========
 
             if (dataChart) {
                 dataChart.destroy();
@@ -464,7 +503,6 @@
                         }
                     ]
                 },
-                // ========= AWAL BAGIAN YANG DIPERBAIKI =========
                 options: {
                     responsive: true,
                     interaction: {
@@ -479,21 +517,17 @@
                                     const peminat = context.chart.data.datasets[0].data[dataIndex];
                                     const tampung = context.chart.data.datasets[1].data[dataIndex];
                                     
-                                    // Hanya tampilkan detail jika kita sedang memproses dataset pertama
-                                    // untuk menghindari teks duplikat di tooltip
                                     if (context.datasetIndex === 0) {
                                         return [
                                             `Jumlah Peminat: ${peminat}`,
                                             `Daya Tampung: ${tampung}`
                                         ];
                                     }
-                                    return ''; // Kosongkan untuk dataset lainnya
+                                    return '';
                                 },
                                 title: function(tooltipItems) {
-                                    // Menggunakan label (tahun) sebagai judul tooltip
                                     return tooltipItems[0].label;
                                 },
-                                // Hapus callback 'footer' yang lama karena sudah digantikan oleh 'label'
                             }
                         }
                     },
@@ -509,25 +543,29 @@
                         }
                     }
                 }
-                // ========= AKHIR BAGIAN YANG DIPERBAIKI =========
             });
         }
 
         function showMessage() {
             chartContainer.style.display = 'none';
+            // ========= AWAL BAGIAN YANG DIPERBAIKI (SEMBUNYIKAN DESKRIPSI) =========
+            descriptionContainer.style.display = 'none';
+            // ========= AKHIR BAGIAN YANG DIPERBAIKI (SEMBUNYIKAN DESKRIPSI) =========
             messageDiv.style.display = 'block';
         }
 
         searchBtn.addEventListener('click', () => {
             const selectedUniversity = universitySelect.value;
-            const enteredMajor = majorInput.value;
+            // ========= AWAL BAGIAN YANG DIPERBAIKI (AMBIL NILAI DARI SELECT) =========
+            const selectedMajor = majorSelect.value;
+            // ========= AKHIR BAGIAN YANG DIPERBAIKI (AMBIL NILAI DARI SELECT) =========
             
-            if (!selectedUniversity || !enteredMajor) {
-                alert("Mohon pilih universitas dan ketik jurusan terlebih dahulu.");
+            if (!selectedUniversity || !selectedMajor) {
+                alert("Mohon pilih universitas dan jurusan terlebih dahulu.");
                 return;
             }
 
-            const data = findMajorData(selectedUniversity, enteredMajor);
+            const data = findMajorData(selectedUniversity, selectedMajor);
 
             if (data) {
                 displayChart(data);
