@@ -7,25 +7,38 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         /* =============================== */
-        /* CSS Stylesheet                  */
+        /* CSS Stylesheet (Modern Revisi)  */
         /* =============================== */
 
-        /* Reset CSS & General Styling */
+        :root {
+            --primary-color: #3498db;
+            --dark-blue: #2c3e50;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --text-dark: #333;
+            --text-light: #555;
+            --border-color: #e0e0e0;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
-            line-height: 1.6;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.7;
         }
 
         .container {
@@ -34,41 +47,41 @@
             padding: 0 20px;
         }
 
-        /* Header Atas dengan Logo Gambar */
+        /* Header Atas */
         .top-header {
-            background-color: #ffffff;
-            padding: 1rem 0; /* Mengurangi padding sedikit agar tidak terlalu besar */
-            border-bottom: 1px solid #e0e0e0;
+            background-color: var(--bg-white);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
         }
         
         .header-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px; /* Jarak antara logo dan teks */
+            gap: 20px;
         }
 
         .header-logo img {
-            height: 60px; /* Ukuran tinggi logo */
-            width: auto; /* Lebar otomatis agar proporsional */
-            vertical-align: middle; /* Agar sejajar dengan teks */
+            height: 60px;
+            width: auto;
         }
         
         .header-title {
             font-size: 1.5rem;
             font-weight: 600;
-            color: #2c3e50;
+            color: var(--dark-blue);
         }
 
-
-        /* Navbar */
+        /* Navbar Modern (Glassmorphism) */
         .navbar {
-            background-color: #2c3e50;
+            background-color: rgba(44, 62, 80, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .navbar ul {
@@ -76,112 +89,78 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-wrap: wrap; /* Agar responsif di layar kecil */
+            flex-wrap: wrap;
         }
 
         .navbar ul li {
-            margin: 5px 20px;
+            margin: 5px 10px;
         }
 
         .navbar ul li a {
             color: #ffffff;
             text-decoration: none;
-            font-weight: 400;
+            font-weight: 500;
             font-size: 1rem;
-            padding: 5px 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            padding: 10px 18px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
         }
 
         .navbar ul li a:hover {
-            background-color: #3498db;
+            background-color: var(--primary-color);
             color: #fff;
         }
 
-        /* Hero Section (Bagian Gambar Sekolah) */
-        .hero-section {
-            height: 70vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://file.data.kemendikdasmen.go.id/sekolahkita/20/2010/20103292-8.jpg'); /* Ganti dengan URL gambar sekolah Anda */
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: #fff;
-            padding: 0 20px;
-        }
-
-        .hero-content {
-            max-width: 800px;
-        }
-
-        .school-name {
-            font-size: clamp(2.5rem, 5vw, 4rem); /* Font responsif */
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
-        }
-
-        .school-tagline {
-            font-size: clamp(1.2rem, 3vw, 1.5rem); /* Font responsif */
-            font-weight: 300;
-            margin-top: 1rem;
-        }
-
-        /* Visi Misi Section */
-        .vision-mission-section {
-            padding: 60px 0;
-            background-color: #ffffff;
+        /* Konten Modern */
+        .vision-mission-section { /* Menggunakan class yang ada di HTML */
+            padding: 80px 0;
+            background-color: var(--bg-light);
         }
 
         .vision-mission-section h2 {
             text-align: center;
             font-size: 2.5rem;
-            margin-bottom: 40px;
-            color: #2c3e50;
+            margin-bottom: 50px;
+            color: var(--dark-blue);
         }
 
+        /* Kartu Konten Modern (Soft Shadow) */
         .vision-mission-content {
-            background-color: #fff;
-            padding: 40px;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            background-color: var(--bg-white);
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04), 0 20px 50px rgba(0, 0, 0, 0.08);
         }
 
-        .vision, .mission {
-            margin-bottom: 30px;
+        /* Styling paragraf di dalam .vision (untuk halaman kontak) */
+        .vision p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 2; /* Memberi jarak lebih untuk daftar kontak */
         }
         
-        .mission {
-            margin-bottom: 0;
+        /* ========= AWAL KODE BARU UNTUK PETA ========= */
+        .map-container {
+            margin-top: 2.5rem;
+            border-radius: 12px; /* Cocokkan dengan radius kartu */
+            overflow: hidden; /* Penting agar radius terlihat di iframe */
+            border: 1px solid var(--border-color);
         }
 
-        .vision h3, .mission h3 {
-            font-size: 1.8rem;
-            color: #3498db;
-            margin-bottom: 10px;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 5px;
-            display: inline-block;
+        .map-container iframe {
+            width: 100%;
+            height: 450px; /* Tinggi yang disesuaikan */
+            border: 0;
+            display: block; /* Menghilangkan spasi aneh di bawah iframe */
         }
-
-        .mission ul {
-            list-style-position: inside;
-            padding-left: 10px;
-        }
-
-        .mission ul li {
-            margin-bottom: 10px;
-        }
-
+        /* ========= AKHIR KODE BARU UNTUK PETA ========= */
+        
         /* Footer */
         .site-footer {
-            background-color: #2c3e50;
+            background-color: var(--dark-blue);
             color: #bdc3c7;
             text-align: center;
-            padding: 20px 0;
+            padding: 40px 0;
             font-size: 0.9rem;
         }
         
@@ -215,11 +194,21 @@
                 <h2>Kontak</h2>
                 <div class="vision-mission-content">
                     <div class="vision">
-                        <p><br>Alamat: Jl. Mawar Merah VI Perumnas Klender, Malaka Jaya, Duren Sawit, Jakarta Timur 13460<br>
-                            <br>Telepon: 021 862-2372</br>
-                            <br>Email: info@sman103jakarta.sch.id</br></p>
+                        <p>
+                            Alamat: Jl. Mawar Merah VI Perumnas Klender, Malaka Jaya, Duren Sawit, Jakarta Timur 13460<br>
+                            Telepon: 021 862-2372<br>
+                            Email: info@sman103jakarta.sch.id
+                        </p>
                     </div>
-                </div>
+
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.216399068417!2d106.9038033147692!3d-6.235282995486804!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f33b11e1816d%3A0x69f2323e207908c6!2sSMAN%20103%20Jakarta!5e0!3m2!1sen!2sid!4v1678888888888!5m2!1sen!2sid" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    </div>
             </div>
         </section>
 
