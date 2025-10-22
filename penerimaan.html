@@ -15,7 +15,7 @@
         /* =============================== */
 
         :root {
-            --primary-color: #303c45;
+            --primary-color: #3498db;
             --dark-blue: #2c3e50;
             --bg-light: #f8f9fa;
             --bg-white: #ffffff;
@@ -256,6 +256,37 @@
             border-color: var(--danger-color);
             color: var(--danger-color);
         }
+        
+        /* ========= AWAL ANIMASI FADE-IN HALAMAN (BARU) ========= */
+        body {
+            opacity: 0; 
+            animation: fadeInPage 0.8s ease-out 0.2s forwards; 
+        }
+
+        @keyframes fadeInPage {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        /* ========= AKHIR ANIMASI FADE-IN HALAMAN (BARU) ========= */
+        
+        
+        /* ========= AWAL ANIMASI SCROLL (LAMA) ========= */
+        .hidden-anim {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+        
+        .visible-anim {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* ========= AKHIR ANIMASI SCROLL (LAMA) ========= */
     </style>
 </head>
 <body>
@@ -280,7 +311,7 @@
     </nav>
 
     <main>
-        <section id="penerimaan" class="content-section">
+        <section id="penerimaan" class="content-section hidden-anim">
             <div class="container">
                 <h2>Kalkulator Peluang Masuk</h2>
                 <div class="form-container">
@@ -300,7 +331,7 @@
                                 <input type="number" id="umur-tahun" placeholder="Tahun" required>
                             </div>
                             <div>
-                                <label for="umur-bulan">&nbsp;</label>
+                                <label for="umur-bulan"> </label>
                                 <input type="number" id="umur-bulan" placeholder="Bulan" required>
                             </div>
                         </div>
@@ -385,7 +416,7 @@
     </main>
 
     <footer class="site-footer">
-        <p>&copy; 2025 SMAN 103 Jakarta. Hak Cipta Dilindungi.</p>
+        <p>© 2025 SMAN 103 Jakarta. Hak Cipta Dilindungi.</p>
     </footer>
 
     <script>
@@ -506,8 +537,22 @@
                 resultContainer.style.display = 'block';
                 resultContainer.scrollIntoView({ behavior: 'smooth' });
             });
+            
+            // SCRIPT ANIMASI SCROLL DIMASUKKAN DI SINI
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible-anim');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            const elementsToAnimate = document.querySelectorAll('.hidden-anim');
+            elementsToAnimate.forEach((el) => observer.observe(el));
         });
     </script>
 </body>
 </html>
-
