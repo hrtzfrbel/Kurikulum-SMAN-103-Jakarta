@@ -144,9 +144,10 @@
             border: 1px solid var(--border-color);
         }
 
+        /* CSS INI AKAN MEMBUAT IFRAME APAPUN JADI RESPONSIVE */
         .map-container iframe {
-            width: 100%;
-            height: 450px; 
+            width: 100%; /* Mengabaikan width="800" */
+            height: 450px; /* Mengabaikan height="600" */
             border: 0;
             display: block; 
         }
@@ -160,7 +161,7 @@
             font-size: 0.9rem;
         }
         
-        /* ========= AWAL ANIMASI FADE-IN HALAMAN (BARU) ========= */
+        /* Animasi Fade-in Halaman */
         body {
             opacity: 0; 
             animation: fadeInPage 0.8s ease-out 0.2s forwards; 
@@ -174,10 +175,8 @@
                 opacity: 1;
             }
         }
-        /* ========= AKHIR ANIMASI FADE-IN HALAMAN (BARU) ========= */
         
-        
-        /* ========= AWAL ANIMASI SCROLL (LAMA) ========= */
+        /* Animasi Scroll */
         .hidden-anim {
             opacity: 0;
             transform: translateY(30px);
@@ -189,7 +188,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* ========= AKHIR ANIMASI SCROLL (LAMA) ========= */
     </style>
 </head>
 <body>
@@ -228,14 +226,16 @@
                     </div>
 
                     <div class="map-container">
-                        <iframe src="<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.3236636341326!2d106.93384747424969!3d-6.220982360927625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698d15434fa03f%3A0xdf01a43c003342ce!2sSMA%20Negeri%20103%20Jakarta!5e0!3m2!1sen!2sid!4v1761094278201!5m2!1sen!2sid" 
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.3236636341326!2d106.93384747424969!3d-6.220982360927625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698d15434fa03f%3A0xdf01a43c003342ce!2sSMA%20Negeri%20103%20Jakarta!5e0!3m2!1sen!2sid!4v1761094278201!5m2!1sen!2sid" 
+                            width="800" 
+                            height="600" 
+                            style="border:0;" 
                             allowfullscreen="" 
                             loading="lazy" 
                             referrerpolicy="no-referrer-when-downgrade">
                         </iframe>
                     </div>
-
-                </div>
+                    </div>
             </div>
         </section>
 
@@ -264,4 +264,3 @@
     </script>
 </body>
 </html>
-
