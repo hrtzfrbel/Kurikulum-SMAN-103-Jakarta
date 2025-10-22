@@ -16,7 +16,7 @@
         /* =============================== */
 
         :root {
-            --primary-color: #303c45;
+            --primary-color: #3498db;
             --dark-blue: #2c3e50;
             --bg-light: #f8f9fa;
             --bg-white: #ffffff;
@@ -39,7 +39,7 @@
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg-light);
             color: var(--text-dark);
-            line-height: 1.7; /* Readability lebih baik */
+            line-height: 1.7;
         }
 
         .container {
@@ -75,10 +75,9 @@
 
         /* Navbar Modern (Glassmorphism) */
         .navbar {
-            background-color: rgba(44, 62, 80, 0.85); /* Warna dasar semi-transparan */
+            background-color: rgba(44, 62, 80, 0.85); 
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px); /* Untuk Safari */
-            
+            -webkit-backdrop-filter: blur(10px);
             padding: 1rem 0;
             position: sticky;
             top: 0;
@@ -103,8 +102,8 @@
             text-decoration: none;
             font-weight: 500;
             font-size: 1rem;
-            padding: 10px 18px; /* Bentuk 'pill' */
-            border-radius: 50px; /* Sangat bulat */
+            padding: 10px 18px; 
+            border-radius: 50px; 
             transition: all 0.3s ease;
         }
 
@@ -120,7 +119,7 @@
         }
         
         .content-section:nth-child(even) {
-             background-color: var(--bg-light); /* Latar selang-seling */
+             background-color: var(--bg-light); 
         }
 
         .content-section h2 {
@@ -130,11 +129,10 @@
             color: var(--dark-blue);
         }
 
-        /* Kartu Konten Modern (Soft Shadow) */
         .content-box {
             background-color: var(--bg-white);
-            padding: 40px; /* Disesuaikan untuk tabel & form */
-            border: none; /* Hapus border lama */
+            padding: 40px; 
+            border: none; 
             border-radius: 16px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04), 0 20px 50px rgba(0, 0, 0, 0.08);
         }
@@ -161,7 +159,6 @@
         tr:last-child td {
             border-bottom: none;
         }
-        /* Efek hover modern pada baris tabel */
         tr:hover {
             background-color: #fdfdfd;
         }
@@ -186,7 +183,7 @@
             padding: 12px 15px;
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
-            border: 1px solid var(--border-color); /* Border lebih tipis */
+            border: 1px solid var(--border-color); 
             border-radius: 8px;
             transition: border-color 0.3s, box-shadow 0.3s;
             background-color: #fff;
@@ -195,7 +192,7 @@
         select:focus, input[type="text"]:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15); /* Efek focus modern */
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15); 
         }
 
         .search-button {
@@ -203,7 +200,7 @@
             font-size: 1rem;
             font-weight: 600;
             color: #fff;
-            background-color: var(--dark-blue); /* Warna tombol utama */
+            background-color: var(--dark-blue); 
             border: none;
             border-radius: 8px;
             cursor: pointer;
@@ -212,7 +209,7 @@
         }
         
         .search-button:hover {
-            background-color: var(--primary-color); /* Hover jadi warna primer */
+            background-color: var(--primary-color); 
             box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
             transform: translateY(-3px);
         }
@@ -236,7 +233,6 @@
             border-radius: 12px;
         }
         
-        /* Deskripsi Jurusan (Modern) */
         #description-container {
             display: none;
             margin-top: 2.5rem;
@@ -262,6 +258,38 @@
             padding: 40px 0;
             font-size: 0.9rem;
         }
+        
+        /* ========= AWAL ANIMASI FADE-IN HALAMAN (BARU) ========= */
+        body {
+            opacity: 0; 
+            animation: fadeInPage 0.8s ease-out 0.2s forwards; 
+        }
+
+        @keyframes fadeInPage {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        /* ========= AKHIR ANIMASI FADE-IN HALAMAN (BARU) ========= */
+        
+        
+        /* ========= AWAL ANIMASI SCROLL (LAMA) ========= */
+        .hidden-anim {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+        
+        .visible-anim {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* ========= AKHIR ANIMASI SCROLL (LAMA) ========= */
+
     </style>
 </head>
 <body>
@@ -286,7 +314,7 @@
     </nav>
 
     <main>
-        <section id="kelulusan" class="content-section">
+        <section id="kelulusan" class="content-section hidden-anim">
             <div class="container">
                 <h2>Informasi Kelulusan</h2>
                 <div class="content-box">
@@ -332,7 +360,7 @@
             </div>
         </section>
 
-        <section class="content-section">
+        <section class="content-section hidden-anim">
             <div class="container">
                 <h2>Data Peminat & Daya Tampung Universitas</h2>
                 <div class="content-box">
@@ -372,7 +400,7 @@
     </main>
 
     <footer class="site-footer">
-        <p>&copy; 2025 SMAN 103 Jakarta. Hak Cipta Dilindungi.</p>
+        <p>© 2025 SMAN 103 Jakarta. Hak Cipta Dilindungi.</p>
     </footer>
 
     <script>
@@ -585,6 +613,23 @@
             }
         });
     </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible-anim');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        const elementsToAnimate = document.querySelectorAll('.hidden-anim');
+        elementsToAnimate.forEach((el) => observer.observe(el));
+    });
+    </script>
 </body>
 </html>
-
