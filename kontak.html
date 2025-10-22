@@ -15,7 +15,7 @@
         /* =============================== */
 
         :root {
-            --primary-color: #303c45;
+            --primary-color: #3498db;
             --dark-blue: #2c3e50;
             --bg-light: #f8f9fa;
             --bg-white: #ffffff;
@@ -112,7 +112,7 @@
         }
 
         /* Konten Modern */
-        .vision-mission-section { /* Menggunakan class yang ada di HTML */
+        .vision-mission-section { 
             padding: 80px 0;
             background-color: var(--bg-light);
         }
@@ -124,7 +124,6 @@
             color: var(--dark-blue);
         }
 
-        /* Kartu Konten Modern (Soft Shadow) */
         .vision-mission-content {
             background-color: var(--bg-white);
             padding: 50px;
@@ -132,28 +131,25 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04), 0 20px 50px rgba(0, 0, 0, 0.08);
         }
 
-        /* Styling paragraf di dalam .vision (untuk halaman kontak) */
         .vision p {
             font-size: 1.1rem;
             color: var(--text-light);
-            line-height: 2; /* Memberi jarak lebih untuk daftar kontak */
+            line-height: 2; 
         }
         
-        /* ========= AWAL KODE BARU UNTUK PETA ========= */
         .map-container {
             margin-top: 2.5rem;
-            border-radius: 12px; /* Cocokkan dengan radius kartu */
-            overflow: hidden; /* Penting agar radius terlihat di iframe */
+            border-radius: 12px; 
+            overflow: hidden; 
             border: 1px solid var(--border-color);
         }
 
         .map-container iframe {
             width: 100%;
-            height: 450px; /* Tinggi yang disesuaikan */
+            height: 450px; 
             border: 0;
-            display: block; /* Menghilangkan spasi aneh di bawah iframe */
+            display: block; 
         }
-        /* ========= AKHIR KODE BARU UNTUK PETA ========= */
         
         /* Footer */
         .site-footer {
@@ -164,6 +160,36 @@
             font-size: 0.9rem;
         }
         
+        /* ========= AWAL ANIMASI FADE-IN HALAMAN (BARU) ========= */
+        body {
+            opacity: 0; 
+            animation: fadeInPage 0.8s ease-out 0.2s forwards; 
+        }
+
+        @keyframes fadeInPage {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        /* ========= AKHIR ANIMASI FADE-IN HALAMAN (BARU) ========= */
+        
+        
+        /* ========= AWAL ANIMASI SCROLL (LAMA) ========= */
+        .hidden-anim {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+        
+        .visible-anim {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* ========= AKHIR ANIMASI SCROLL (LAMA) ========= */
     </style>
 </head>
 <body>
@@ -189,7 +215,7 @@
 
     <main>
     
-       <section class="vision-mission-section">
+       <section class="vision-mission-section hidden-anim">
             <div class="container">
                 <h2>Kontak</h2>
                 <div class="vision-mission-content">
@@ -202,20 +228,39 @@
                     </div>
 
                     <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1678.3737142861166!2d106.935557439704!3d-6.220081182339009!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698d15434fa03f%3A0xdf01a43c003342ce!2sSMA%20Negeri%20103%20Jakarta!5e0!3m2!1sen!2sid!4v1760934701288!5m2!1sen!2sid" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.216399068417!2d106.9038033147692!3d-6.235282995486804!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f33b11e1816d%3A0x69f2323e207908c6!2sSMAN%20103%20Jakarta!5e0!3m2!1sen!2sid!4v1678888888888!5m2!1sen!2sid" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
                         </iframe>
                     </div>
-                    </div>
+
+                </div>
             </div>
         </section>
 
     </main>
 
     <footer class="site-footer">
-        <p>&copy; 2025 SMAN 103 Jakarta. Hak Cipta Dilindungi.</p>
+        <p>© 2025 SMAN 103 Jakarta. Hak Cipta Dilindungi.</p>
     </footer>
 
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible-anim');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        const elementsToAnimate = document.querySelectorAll('.hidden-anim');
+        elementsToAnimate.forEach((el) => observer.observe(el));
+    });
+    </script>
 </body>
 </html>
-
-
